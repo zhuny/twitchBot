@@ -1,0 +1,26 @@
+{
+  "name": "twitchbot",
+  "version": "1.0.0",
+  "description": "My Twitch Bot",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhuny/twitchBot.git"
+  },
+  "keywords": [
+    "twitch",
+    "bot"
+  ],
+  "author": "zhuny936772@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zhuny/twitchBot/issues"
+  },
+  "homepage": "https://github.com/zhuny/twitchBot#readme",
+  "dependencies": {
+    "tmi.js": "^1.8.3"
+  }
+}
