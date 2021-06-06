@@ -42,7 +42,12 @@ function onMessageHandler (target, context, msg, self) {
       const commandFunc = commandMap[commandName];
       if (typeof commandFunc === "function") {
         console.log(`* Executed '${commandName}'`);
-        commandFunc(...commandList.filter((e, i) => i > 0));
+        commandFunc({
+          say: (botMsg) => {
+            client.say(target, botMsg);
+          }, context,
+          args: commandList.filter((e, i) => i > 0),
+        });
       } else {
         console.log(`* Unknown command '${commandName}'`)
       }
