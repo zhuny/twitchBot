@@ -44,7 +44,7 @@ function onMessageHandler (target, context, msg, self) {
         console.log(`* Executed '${commandName}'`);
         commandFunc({
           say: (botMsg) => {
-            client.say(target, botMsg);
+            client.say(target, `@${context.username}, ${botMsg}`);
           }, context,
           args: commandList.filter((e, i) => i > 0),
         });
