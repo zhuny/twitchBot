@@ -40,4 +40,17 @@ export const initSMM2 = (commandMap) => {
       say(`@${username}, Your level ${removedLevel.levelCode} is removed`)
     }
   };
+
+  commandMap.current = ({say, context: {username}, args: [levelCode]}) => {
+    const registerLevel = userRegisterLevel.map((level, index) => {
+      return {level, index};
+    }).find((m) => {
+      return m.level.username === username;
+    });
+    if (registerLevel === undefined) {
+      say(`@${username}, You didn't registry any level.`);
+    } else {
+      say(`@${username}, Your level is ${registerLevel.level.levelCode}. Your position is ${registerLevel.index+1}.`)
+    }
+  }
 };
