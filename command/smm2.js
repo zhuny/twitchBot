@@ -31,6 +31,13 @@ export const initSMM2 = (commandMap) => {
     say(`@${username}, Thx for adding. Your level code : ${levelCode}`);
   };
 
-  commandMap.remove = () => {
+  commandMap.remove = ({say, context: {username}, args: [levelCode]}) => {
+    const registerLevelIndex = userRegisterMap.findIndex((m) => m.username === username);
+    if (registerLevelIndex === -1) {
+      say(`@${username}, You didn't registry any level.`);
+    } else {
+      const removedLevel = userRegisterMap.splice(registerLevelIndex, 1)[0];
+      say(`@${username}, Your level ${removedLevel.levelCode} is removed`)
+    }
   };
 };
