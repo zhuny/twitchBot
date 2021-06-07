@@ -37,11 +37,11 @@ export const initSMM2 = (commandMap) => {
       say(`You didn't registry any level.`);
     } else {
       const removedLevel = userRegisterLevel.splice(registerLevelIndex, 1)[0];
-      say(`Your level ${removedLevel.levelCode} is removed`)
+      say(`Your level ${removedLevel.levelCode} is removed`);
     }
   };
 
-  commandMap.current = ({say, context: {username}, args: [levelCode]}) => {
+  commandMap.me = ({say, context: {username}, args: [levelCode]}) => {
     const registerLevel = userRegisterLevel.map((level, index) => {
       return {level, index};
     }).find((m) => {
@@ -50,7 +50,19 @@ export const initSMM2 = (commandMap) => {
     if (registerLevel === undefined) {
       say(`You didn't registry any level.`);
     } else {
-      say(`Your level is ${registerLevel.level.levelCode}. Your position is ${registerLevel.index+1}.`)
+      say(`Your level is ${registerLevel.level.levelCode}. Your position is ${registerLevel.index+1}.`);
     }
-  }
+  };
+
+  commandMap.next = ({say, context: {badges: {broadcaster}}}) => {
+    // 스트리머만 사용 가능
+    if (broadcaster === '1') {
+      if (userRegisterLevel.length === 0) {
+        say('No level code found');
+      } else {
+        const firstLevel = userRegisterLevel.shift();
+        say(`@${firstLevel.username}, It's time to play this level! : ${firstLevel.levelCode}`);
+      }
+    }
+  };
 };
