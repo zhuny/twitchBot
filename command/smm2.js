@@ -3,7 +3,8 @@ const userRegisterLevel = [];
 const isValidLevelCode = (levelCode) => {
   return (
       (typeof levelCode === 'string')
-      && levelCode.match(/^[0-9A-Z]{3}-[0-9A-Z]{3}-[0-9A-Z]{3}$/i)  // FIXME: 'IOZ' are invalid alphabet for level code
+      && levelCode.match(/^[0-9A-Z]{3}-[0-9A-Z]{3}-[0-9A-Z]{3}$/i)
+      && ['I', 'O', 'Z'].every((char) => levelCode.toUpperCase().indexOf(char) === -1)
   );
 };
 
