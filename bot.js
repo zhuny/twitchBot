@@ -1,6 +1,7 @@
 import {initSMM2} from "./command/smm2.js";
 import tmi from 'tmi.js';
 import env from "./env.js";
+import {initWelcome} from "./command/welcome.js";
 
 
 const bot = new (
@@ -77,5 +78,6 @@ const bot = new (
 
 // init bot
 initSMM2(bot);
+initWelcome(bot);
 
 bot.start();
