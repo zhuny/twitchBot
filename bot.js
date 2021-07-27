@@ -7,6 +7,7 @@ const bot = new (
   class BotClient {
     constructor() {
       this.handlerMap = {};
+      this.handlerAll = [];
       this.client = new tmi.client({
         identity: {
           username: "zhunybot",
@@ -42,6 +43,19 @@ const bot = new (
         }
       });
 
+      this.client.on('message', (target, context, msg, self) => {
+        if (self) { return; }
+
+        this.handlerAll.map(({handler}) => {
+          handler({
+            say: (botMsg) => {
+              this.client.say(target, `@${context.username}, ${botMsg}`)
+            },
+            context, msg,
+          });
+        });
+      });
+
       this.client.on('connected', (addr, port) => {
         console.log(`* Connected to ${addr}:${port}`);
       });
@@ -49,6 +63,10 @@ const bot = new (
 
     registerCommand({name, handler, doc}) {
       this.handlerMap[name] = {name, handler, doc};
+    }
+
+    registerHandler({handler}) {
+      this.handlerAll.push({handler});
     }
 
     start() {
