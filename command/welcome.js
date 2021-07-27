@@ -15,4 +15,18 @@ export const initWelcome = (bot) => {
       }
     }
   })
+
+  bot.registerCommand({
+    name: 'help',
+    handler: ({say}) => {
+      say(
+        Object.values(bot.handlerMap).filter(({doc}) => {
+          return doc;
+        }).map(({name, doc}) => {
+          return `!${name} : ${doc}`;
+        }).join(', ')
+      );
+    },
+    doc: 'show this message'
+  });
 };
