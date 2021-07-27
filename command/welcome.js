@@ -9,12 +9,12 @@ export const initWelcome = (bot) => {
       }
 
       if (!firstMessageTime[username]) {
-        say("Welcome!!! to zhuny's stream!");
+        say("Welcome!!! to zhuny's stream! For more info, use '!help'");
         firstMessageTime[username] = new Date();
         console.log(`New user chat: '${username}'`)
       }
     }
-  })
+  });
 
   bot.registerCommand({
     name: 'help',
