@@ -26,12 +26,12 @@ const bot = new (
           let commandName = commandList[0];
           if (commandName.startsWith('!')) {
             commandName = commandName.substring(1, commandName.length);
-            const commandFunc = commandMap[commandName];
+            const commandFunc = this.handlerMap[commandName];
             if (typeof commandFunc?.handler === "function") {
-              console.log(`* Executed '${commandFunc.name}'`);
+              console.log(`* Executed '${commandFunc.name}' by ${context.username}`);
               return commandFunc.handler({
                 say: (botMsg) => {
-                  client.say(target, `@${context.username}, ${botMsg}`);
+                  this.client.say(target, `@${context.username}, ${botMsg}`);
                 }, context,
                 args: commandList.filter((e, i) => i > 0),
               });
